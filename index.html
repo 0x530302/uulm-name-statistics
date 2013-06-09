@@ -115,9 +115,9 @@
 					var arr = [];
 					labels = [];
 
-					for (var i = 0; i < data[0].length; i++) {
-						if (data[0][i][1] >= min && data[0][i][1] <= max) {
-							arr[arr.length] = [data[0][i][0] + " (" + data[0][i][1] + ")", data[0][i][1]];
+					for (var i = 0; i < data.length; i++) {
+						if (data[i][1] >= min && data[i][1] <= max) {
+							arr[arr.length] = [data[i][0] + " (" + data[i][1] + ")", data[i][1]];
 						}
 					}
 					plot1.replot({data:[arr]});
