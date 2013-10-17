@@ -1,7 +1,7 @@
-# uulm-name-statistics
+# Visualizing firstname distribution at the University of Ulm
 
-Visualizing firstname distribution within the University of Ulm.
-Open [http://ulmapi.github.io/uulm-name-statistics](http://ulmapi.github.io/uulm-name-statistics) 
+Open 
+[http://ulmapi.github.io/uulm-firstname-statistic](http://ulmapi.github.io/uulm-firstname-statistic) 
 to view the index.html.
 
 
