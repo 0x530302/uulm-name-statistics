@@ -1,15 +1,9 @@
 # uulm-name-statistics
 
-Visualizing firstname distribution as a bar chart.
+Visualizing firstname distribution within the University of Ulm.
+Open [http://ulmapi.github.io/uulm-name-statistics](http://ulmapi.github.io/uulm-name-statistics) 
+to view the index.html.
 
-# Getting started
-
-This project runs inside your javascript capable browser, just open the index.html.
-E.g. using firefox:
-
-	$ git clone https://github.com/0x530302/uulm-name-statistics.git
-	$ cd uulm-name-statistics/
-	$ firefox index.html
 
 # Libraries & Icons
 
@@ -17,6 +11,7 @@ E.g. using firefox:
  * [jQuery Mobile](http://jquerymobile.com)
  * [jqPlot](http://www.jqplot.com)
  * [GitHub Buttons](http://github.com/mdo/github-buttons)
+
 
 # License
 
