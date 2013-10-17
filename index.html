@@ -7,20 +7,29 @@
 
 		<title>uulm Vornamen-Statistik</title>
 		<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.min.css">
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.1.min.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.2.min.css">
 		<link rel="stylesheet" type="text/css" href="css/github-btn.css">
 
 		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
 		<script type="text/javascript" src="js/data.js"></script>
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
-		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
 
-		<script type="text/javascript" src="js/jqplot.categoryAxisRenderer.min.js"></script>
+		<script type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+		<script type="text/javascript" src="js/jqplot.canvasTextRenderer.min.js"></script>
 		<script type="text/javascript" src="js/jqplot.barRenderer.min.js"></script>
+		<script type="text/javascript" src="js/jqplot.categoryAxisRenderer.min.js"></script>
+
 		<script type="text/javascript" src="js/jqplot.pointLabels.min.js"></script>
 
 		<style type="text/css">
+			.ui-header .ui-title {
+				margin-right: 10%;
+				margin-left: 10%;
+			}
+
 			#aboutProject {
 				border-radius: 8px;
 				font-size: 0.8em;
@@ -28,7 +37,7 @@
 				padding: 15px;
 				color: #222;
 				width: 480px;
-				height: 250px;
+				height: 300px;
 			}
 
 			#aboutProject .bottom-left {
@@ -42,28 +51,15 @@
 				float:right; 
 				text-align:right;
 				position: absolute;
-				bottom: 20px;
+				bottom: 10px;
 				right:25px;
 			}
 		</style>
 	</head>
 	<body>
-		<div data-role="page">
-			<div data-role="header" data-position="fixed" style="height:50px;">
-				<div style="float:left;margin:5px;">
-					<img src="img/uulm.png" style="height:40px" />
-				</div>
-
-				<div style="position:absolute;top:0px;left:0px;width:100%;z-index:99;text-align:center;">
-					<h1 style="font-size:20px;">Vornamen an der Universit&auml;t Ulm (2013)</h1>
-				</div>
-
-				<div>
-					<a href="#aboutProject" data-rel="popup" data-position-to="window" data-transition="fade" style="position:absolute;top:5px;right:5px;">
-						<img src="img/icon.png" alt="ulmapi" title="Informationen zu diesem Projekt"
-						/>
-					</a>
-				</div>
+		<div data-role="page" id="graph-page">
+			<div data-role="header">
+				<h1>Vornamen an der Uni Ulm (Oktober 2013)</h1>
 			</div>
 
 			<div data-role="popup" id="aboutProject" data-overlay-theme="a" data-theme="d" data-corners="false">
@@ -75,8 +71,13 @@
 					</a>
 				</div>
 				<p>
-					Ich habe beim OpenCityCamp 2013 spontan die Idee bekommen, die Vornamen der Studierenden der Universität Ulm zu visualisieren.
-					Wenige Stunden später enstand diese kleine Web-App.
+					Dominik hat beim OpenCityCamp 2013 spontan die Idee bekommen, die Vornamen der Studierenden der Universität Ulm zu visualisieren. Wenige Stunden später enstand diese kleine Web-App.
+					Leider haben wir es einige Monate
+					nicht geschafft diese final zu
+					ver&ouml;ffentlichen, so dass Michi
+					sich Ende Oktober hingesetzt hat um
+					den Feinschliff zu machen und die
+					Daten zu aktualisieren.
 				</p>
 				<br>
 				<h3>Verwendete Technologien</h3>
@@ -89,33 +90,50 @@
 				</p>
 				<div class="bottom-left">
 					<span id="github-btn" class="github-btn github-me github-btn-large">
-						<a target="_blank" href="https://github.com/0x530302/uulm-name-statistics" id="gh-btn" class="gh-btn">
+						<a target="_blank" href="https://github.com/UlmAPI/uulm-firstname-statistic" id="gh-btn" class="gh-btn">
 							<span class="gh-ico"></span>
-							<span id="gh-text" class="gh-text">uulm-name-statistics auf GitHub</span>
+							<span id="gh-text" class="gh-text">uulm-firstname-statistic auf GitHub</span>
 						</a>
 					</span>
 				</div>
 				<div class="bottom-right">
-					Dominik Meißner<br>
-					<a href="http://ech0.de">http://ech0.de</a>
+					<p>
+						Dominik Meißner<br>
+						<a href="http://ech0.de">http://ech0.de</a>
+					</p>
+					<p>
+						Michael M&uuml;ller<br>
+						<a href="http://micha.elmueller.net">http://micha.elmueller.net</a>
+					</p>
 				</div>
 			</div>
 
-			<div data-role="content" style="padding:0px;margin:20px;">
-				<div id="pie" style="width:85%;float:right;"></div>
-
-			
-				<div style="width:100%;float:left;clear:both;margin-top:30px;">
-					<div style="width:15%;float:left;text-align:center;margin-top:-15px;">
-						<h3 style="margin-top:9px;padding-right:10px;">
-							Dargestellter Bereich:
-						</h3>
-					</div>
-					<div data-role="rangeslider" style="float:right;width:85%;">
-						<input name="range-1a" id="range-1a" min="0" max="200" value="100" type="range">
+			<div data-role="content">
+					<div class="ui-widget" data-role="fieldcontain">
+					<div data-role="rangeslider">
+						<label for="range-1a">Dargestellter Bereich:</label>
+						<input name="range-1a" id="range-1a" min="0" max="200" value="110" type="range">
 						<input name="range-1b" id="range-1b" min="0" max="250" value="250" type="range">
 					</div>
-				</div>
+					</div>
+
+					<div class="ui-widget" data-role="fieldcontain">
+						<label for="tags">Direkte Anzeige eines Namens:</label>
+						<input id="tags" />
+					</div>
+
+
+					<div style="min-height:300px;margin-left:10%;" id="outerchart">
+						<div style="min-height:300px;" id="chart"></div>
+					</div>
+			</div>
+			<div data-role="footer" class="ui-bar-c" style="background:none;margin-top:10px;border:none;text-align:right;padding-right:1em;">
+				<a data-role="button" href="#aboutProject" data-rel="popup" data-position-to="window" data-transition="fade">
+					<img src="img/uulm.png" style="height:32px" />
+				</a>
+				<a data-role="button" href="#aboutProject" data-rel="popup" data-position-to="window" data-transition="fade">
+					<img src="img/icon.png" alt="ulmapi" title="Informationen zu diesem Projekt" />
+				</a>
 			</div>
 		</div>
 		<script type="text/javascript">
@@ -130,20 +148,23 @@
 
 					for (var i = 0; i < data.length; i++) {
 						if (data[i][1] >= min && data[i][1] <= max) {
-							//arr[arr.length] = [data[i][0] + " (" + data[i][1] + ")", data[i][1]];
 							arr[arr.length] = [
 								data[i][1]
 								, data[i][0] + " (" + data[i][1] + ")"
 							];
 						}
 					}
-					//console.log(arr);
+
 					plot1.replot({data:[arr]});
+					var shift = $(".jqplot-yaxis").css("left").replace(/^\-/, "");
+					$("#outerchart").css("margin-left", shift);
 				}
 			}
-			$(document).ready(function(){
+
+			$(document).on('pageshow', '#graph-page', function(){ 
 				$(window).resize(function() {
-					$("#pie").height($(window).height() - 190);
+					//$("#chart").height("100%");
+					$("#chart").height($(window).height() - 290);
 					if (plot1) {
 						plot1.replot();
 					}
@@ -152,16 +173,19 @@
 				$("#range-1a").change(recalcData);
 				$("#range-1b").change(recalcData);
 
-				plot1 = $.jqplot('pie', [[['Loading Data...', 0]]], {
+				plot1 = $.jqplot('chart', [[['Loading Data...', 0]]], {
 					seriesDefaults: {
-						 rendererOptions: { barDirection: 'horizontal' }
+						 rendererOptions: { barDirection: 'horizontal',
+						 fillToZero: true }
 						, renderer: $.jqplot.BarRenderer
-						, pointLabels: { show: true, location: 'e', edgeTolerance: -15 }
-						, shadowAngle: 135
 					},
 					axes: {
 						yaxis: {
+							//autoscale: true,
+							//renderer: $.jqplot.CanvasAxisTickRenderer
+							//renderer: $.jqplot.CanvasAxisLabelRenderer
 							renderer: $.jqplot.CategoryAxisRenderer
+							 //, tickOptions: { formatString: '%#d%%' }
 						}
 					}
 				});
@@ -171,6 +195,17 @@
 					window.location.hash = "";
 					window.location.reload();
 				}
+
+				/* build autocomplete stuff */
+				var availableTags = [];
+
+				for (var i = 0; i < data.length; i++) {
+					availableTags.push(data[i][0] + " (" + data[i][1] + ")");
+				}
+
+				$("#tags").autocomplete({
+					source: availableTags
+				});
 			});
 		</script>
 	</body>

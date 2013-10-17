@@ -1,8 +1,8 @@
 # Visualizing firstname distribution at the University of Ulm
 
 Open 
-[http://ulmapi.github.io/uulm-firstname-statistic](http://ulmapi.github.io/uulm-firstname-statistic) 
-to view the index.html.
+[http://ulmapi.github.io/uulm-firstname-statistic/](http://ulmapi.github.io/uulm-firstname-statistic/) 
+to view the visualization.
 
 
 # Libraries & Icons
@@ -19,7 +19,8 @@ The code is licensed under the MIT license:
 
 	Copyright (c) 2013
 
-		Dominik Meissner <http://ech0.de/>
+		Dominik Meissner <http://ech0.de/>,
+		Michael Mueller <http://micha.elmueller.net/>
 
 	Permission is hereby granted, free of charge, to any person obtaining
 	a copy of this software and associated documentation files (the
