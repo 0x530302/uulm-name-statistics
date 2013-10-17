@@ -1,4 +1,4 @@
-KIZ_USER=s_mmuel2
+KIZ_USER=s_foobar
 
 default: all
 
@@ -6,6 +6,9 @@ all:
 	ssh $(KIZ_USER)@login.rz.uni-ulm.de ypcat passwd > ./ypcat-users.lst
 	cat ./ypcat-users.lst \
 		| awk -F ":" '{print $$5}' \
+		| sed -e "s/Prof\.\s//" \
+		| sed -e "s/Dr\.\s//" \
+		| sed -e "s/[^A-Z\s-]/ /i" \
 		| awk -F " " '{print $$1}' \
 		> ./firstnames.lst
 
@@ -13,6 +16,7 @@ all:
 		| sort \
 		| uniq -i -c \
 		| sort -n > ./firstnames.uniq
+
 
 
 	echo "var data = [" > ./js/data.js
@@ -24,5 +28,3 @@ all:
 	rm ./ypcat-users.lst
 	rm ./firstnames.uniq
 	rm ./firstnames.lst
-
-
