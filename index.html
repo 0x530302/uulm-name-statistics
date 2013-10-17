@@ -118,8 +118,10 @@
 					</div>
 
 					<div class="ui-widget" data-role="fieldcontain">
-						<label for="tags">Direkte Anzeige eines Namens:</label>
-						<input id="tags" />
+						<label for="searchField">Direkte Anzeige eines Namens:</label>
+						<input id="searchField" />
+						<ul id="suggestions" data-role="listview" data-inset="true"></ul>
+
 					</div>
 
 
@@ -197,14 +199,24 @@
 				}
 
 				/* build autocomplete stuff */
-				var availableTags = [];
+				var availableNames = [];
 
 				for (var i = 0; i < data.length; i++) {
-					availableTags.push(data[i][0] + " (" + data[i][1] + ")");
+					availableNames.push(data[i][0] + " (" + data[i][1] + ")");
 				}
 
-				$("#tags").autocomplete({
-					source: availableTags
+				$("#searchField").autocomplete({
+					source: availableNames,
+						target: $('#suggestions'),
+						callback: function(e) {
+							var $a = $(e.currentTarget);
+							$('#searchField').val($a.text());
+							$("#searchField").autocomplete('clear');
+						},
+
+						link: 'target.html?term=',
+						minLength: 1
+
 				});
 			});
 		</script>
