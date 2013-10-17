@@ -37,22 +37,6 @@
 				padding: 15px;
 				color: #222;
 				width: 480px;
-				height: 300px;
-			}
-
-			#aboutProject .bottom-left {
-				float:left; 
-				text-align:left;
-				position: absolute;
-				bottom: 20px;
-			}
-
-			#aboutProject .bottom-right {
-				float:right; 
-				text-align:right;
-				position: absolute;
-				bottom: 10px;
-				right:25px;
 			}
 		</style>
 	</head>
@@ -71,42 +55,40 @@
 					</a>
 				</div>
 				<p>
-					Dominik hat beim OpenCityCamp 2013 spontan die Idee bekommen, die Vornamen der Studierenden der Universität Ulm zu visualisieren. Wenige Stunden später enstand diese kleine Web-App.
-					Leider haben wir es einige Monate
-					nicht geschafft diese final zu
-					ver&ouml;ffentlichen, so dass Michi
-					sich Ende Oktober hingesetzt hat um
-					den Feinschliff zu machen und die
-					Daten zu aktualisieren.
+					Dominik hat beim OpenCityCamp 2013 spontan die Idee bekommen, 
+					die Vornamen der Studierenden der Universität Ulm zu visualisieren. 
+					Wenige Stunden später enstand diese kleine Web-App.
+					Leider haben wir es einige Monate nicht geschafft diese final zu
+					ver&ouml;ffentlichen, so dass Michi sich Ende Oktober hingesetzt hat um
+					den Feinschliff zu machen und die Daten zu aktualisieren.
 				</p>
-				<br>
-				<h3>Verwendete Technologien</h3>
+
 				<p>
-					<ul>
-						<li><a href="http://jquery.com">jQuery</a></li>
-						<li><a href="http://jquerymobile.com">jQuery Mobile</a></li>
-						<li><a href="http://jqplot.com">jqPlot</a></li>
-					</ul>
+					<a href="http://ulmAPI.de/">http://www.ulmAPI.de</a>
 				</p>
-				<div class="bottom-left">
-					<span id="github-btn" class="github-btn github-me github-btn-large">
-						<a target="_blank" href="https://github.com/UlmAPI/uulm-firstname-statistic" id="gh-btn" class="gh-btn">
-							<span class="gh-ico"></span>
-							<span id="gh-text" class="gh-text">uulm-firstname-statistic auf GitHub</span>
-						</a>
-					</span>
-				</div>
-				<div class="bottom-right">
-					<p>
-						Dominik Meißner<br>
-						<a href="http://ech0.de">http://ech0.de</a>
-					</p>
-					<p>
-						Michael M&uuml;ller<br>
-						<a href="http://micha.elmueller.net">http://micha.elmueller.net</a>
-					</p>
-				</div>
-			</div>
+
+				<p>&nbsp;</p>
+
+				<span id="github-btn" class="github-btn github-me github-btn-large">
+					<a target="_blank" href="https://github.com/UlmAPI/uulm-firstname-statistic" id="gh-btn" class="gh-btn">
+						<span class="gh-ico"></span>
+						<span id="gh-text" class="gh-text">uulm-firstname-statistic auf GitHub</span>
+					</a>
+				</span>
+
+				<p>&nbsp;</p>
+
+				<p style="text-align:right;">
+					Dominik Meißner<br>
+					<a href="http://ech0.de">http://ech0.de</a>
+				</p>
+
+				<p style="text-align:right;">
+					Michael M&uuml;ller<br>
+					<a href="http://micha.elmueller.net">http://micha.elmueller.net</a>
+				</p>
+
+		</div>
 
 			<div data-role="content" style="overflow:visible;">
 					<div class="ui-widget" data-role="fieldcontain">
@@ -165,7 +147,6 @@
 
 			$(document).on('pageshow', '#graph-page', function(){ 
 				$(window).resize(function() {
-					//$("#chart").height("100%");
 					$("#chart").height($(window).height() - 290);
 					if (plot1) {
 						plot1.replot();
