@@ -38,6 +38,7 @@ all:
 	make further
 	make clean
 
+# build a datafile out of second, third, etc. name
 further:
 	cat ./ypcat-users.lst \
 		| awk -F ":" '{print $$5}' \
