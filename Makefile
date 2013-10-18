@@ -1,5 +1,4 @@
 KIZ_USER=s_foobar
-KIZ_USER=s_mmuel2
 
 default: all
 
@@ -29,7 +28,7 @@ all:
 		>> ./js/data.js
 
 	make further
-	#make clean
+	make clean
 
 # build a datafile out of second, third, etc. name
 further:
