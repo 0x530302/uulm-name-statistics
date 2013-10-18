@@ -8,6 +8,7 @@ all:
 		| awk -F ":" '{print $$5}' \
 		| sed -e "s/Prof\.\s//" \
 		| sed -e "s/Dr\.\s//" \
+		| sed -e "s/-Cifs//" \
 		| sed -e "s/[^A-Z\s-]/ /i" \
 		| awk -F " " '{print $$1}' \
 		| grep -v "Ev-" \
