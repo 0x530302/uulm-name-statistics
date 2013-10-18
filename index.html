@@ -13,6 +13,7 @@
 
 		<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
 		<script type="text/javascript" src="js/data.js"></script>
+		<script type="text/javascript" src="js/further-names-data.js"></script>
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
@@ -115,6 +116,22 @@
 
 					</div>
 
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<div class="ui-widget" data-role="fieldcontain">
+								<label for="firstNames">Nur ersten Vornamen anzeigen</label>
+								<input id="firstNames" name="furtherNames" value="firstNames" type="radio" checked="checked" />
+							</div>
+						</div>
+
+						<div class="ui-block-b">
+							<div class="ui-widget" data-role="fieldcontain">
+								<label for="furtherNames">Nur zweite, dritte und weitere Vornamen</label>
+								<input name="furtherNames" id="furtherNames" type="radio" value="furtherNames" />
+							</div>
+						</div>
+					</div><!-- /grid-a -->
+
 
 					<div style="min-height:300px;margin-left:10%;" id="outerchart">
 						<div style="min-height:300px;" id="chart"></div>
@@ -131,19 +148,27 @@
 		</div>
 		<script type="text/javascript">
 			var plot1;
+			var dataset = data;
+
 			function recalcData() {
 				if (plot1) {
+					if($("[name='furtherNames']:checked").val() === "furtherNames") {
+						dataset = further_data;
+					} else {
+						dataset = data;
+					}
+
 					var min = $("#range-1a").val();
 					var max = $("#range-1b").val();
 
 					var arr = [];
 					labels = [];
 
-					for (var i = 0; i < data.length; i++) {
-						if (data[i][1] >= min && data[i][1] <= max) {
+					for (var i = 0; i < dataset.length; i++) {
+						if (dataset[i][1] >= min && dataset[i][1] <= max) {
 							arr[arr.length] = [
-								data[i][1]
-								, data[i][0] + " (" + data[i][1] + ")"
+								dataset[i][1]
+								, dataset[i][0] + " (" + dataset[i][1] + ")"
 							];
 						}
 					}
@@ -151,51 +176,19 @@
 					plot1.replot({data:[arr]});
 					var shift = $(".jqplot-yaxis").css("left").replace(/^\-/, "");
 					$("#outerchart").css("margin-left", shift);
+					buildAutocomplete();
 				}
 			}
 
-			$(document).on('pageshow', '#graph-page', function(){ 
-				$(window).resize(function() {
-					$("#chart").height($(window).height() - 290);
-					if (plot1) {
-						plot1.replot();
-					}
-				}).resize();
-
-				$("#range-1a").change(recalcData);
-				$("#range-1b").change(recalcData);
-
-				plot1 = $.jqplot('chart', [[['Loading Data...', 0]]], {
-					seriesDefaults: {
-						 rendererOptions: { barDirection: 'horizontal',
-						 fillToZero: true }
-						, renderer: $.jqplot.BarRenderer
-					},
-					axes: {
-						yaxis: {
-							//autoscale: true,
-							//renderer: $.jqplot.CanvasAxisTickRenderer
-							//renderer: $.jqplot.CanvasAxisLabelRenderer
-							renderer: $.jqplot.CategoryAxisRenderer
-							 //, tickOptions: { formatString: '%#d%%' }
-						}
-					}
-				});
-				recalcData();
-
-				if(window.location.hash !== "") {
-					window.location.hash = "";
-					window.location.reload();
-				}
-
+			function buildAutocomplete() {
 				/* build autocomplete stuff */
 				var availableNames = [];
 
 				/* traverese the array in reverse, 
 				so that the first results in the 
 				autocomplete field have most matches */
-				for (var i = data.length-1; i >= 0; i--) {
-					availableNames.push(data[i][0] + " (" + data[i][1] + ")");
+				for (var i = dataset.length-1; i >= 0; i--) {
+					availableNames.push(dataset[i][0] + " (" + dataset[i][1] + ")");
 				}
 
 				$("#searchField").autocomplete({
@@ -211,6 +204,54 @@
 						minLength: 1
 
 				});
+			}
+
+			function changedRadio() {
+				if($("[name='furtherNames']:checked").val() === "furtherNames") {
+					$("#range-1a").val(40);
+					$("#range-1b").val(250);
+					recalcData();
+				} else {
+					$("#range-1a").val(110);
+					$("#range-1b").val(250);
+
+					recalcData();
+				}
+			}
+
+			$(document).on('pageshow', '#graph-page', function(){ 
+				$(window).resize(function() {
+					$("#chart").height($(window).height() - 345);
+					if (plot1) {
+						plot1.replot();
+					}
+				}).resize();
+
+				$("#range-1a").change(recalcData);
+				$("#range-1b").change(recalcData);
+				$("#firstNames").change(changedRadio);
+				$("#furtherNames").change(changedRadio);
+
+				plot1 = $.jqplot('chart', [[['Loading Data...', 0]]], {
+					seriesDefaults: {
+						 rendererOptions: { barDirection: 'horizontal',
+						 fillToZero: true }
+						, renderer: $.jqplot.BarRenderer
+					},
+					axes: {
+						yaxis: {
+							renderer: $.jqplot.CategoryAxisRenderer
+						}
+					}
+				});
+				recalcData();
+
+				if(window.location.hash !== "") {
+					window.location.hash = "";
+					window.location.reload();
+				}
+
+				buildAutocomplete();
 			});
 		</script>
 	</body>
