@@ -66,15 +66,18 @@
 					das Projekt zu aktualisieren und etwas zu erweitern.
 				</p>
 				<p>
-					Der Datensatz besteht &ndash; Stand Oktober 2013 &ndash; aus 13925
-					Eintr&auml;gen. Die Daten stammen aus den Unix-Systemen des 
-					Kommunikations- und Informationszentrums der Uni Ulm (kiz).
-					Es ist jeweils nur der erste Vorname ber&uuml;cksichtigt
-					worden.
+					Der Datensatz f&uuml;r die Vornamen
+					besteht &ndash; Stand Oktober 2013 &ndash; aus 19126
+					Eintr&auml;gen (Studierende, Mitarbeiter, Studentenwerk, Externe, etc.). 
+					Die Daten stammen aus den Unix-Systemen der Uni Ulm.
+					F&uuml;r genauere Infos zur Herkunft am
+					Besten das <a href="https://github.com/UlmApi/uulm-firstname-statistic/blob/gh-pages/Makefile">Makefile</a>
+					f&uuml;r diese Visualisierung unter die Lupe nehmen.
 				</p>
 
 				<p>
-					<a href="http://ulmAPI.de/">http://www.ulmAPI.de</a>
+					Weitere unserer Projekte finden
+					sich auf <a href="http://ulmAPI.de/">http://www.ulmAPI.de</a>.
 				</p>
 
 				<p>&nbsp;</p>
@@ -104,8 +107,8 @@
 					<div class="ui-widget" data-role="fieldcontain">
 					<div data-role="rangeslider">
 						<label for="range-1a">Dargestellter Bereich:</label>
-						<input name="range-1a" id="range-1a" min="0" max="200" value="110" type="range">
-						<input name="range-1b" id="range-1b" min="0" max="250" value="250" type="range">
+						<input name="range-1a" id="range-1a" min="0" max="190" value="110" type="range">
+						<input name="range-1b" id="range-1b" min="0" max="325" value="325" type="range">
 					</div>
 					</div>
 
@@ -119,14 +122,14 @@
 					<div class="ui-grid-a">
 						<div class="ui-block-a">
 							<div class="ui-widget" data-role="fieldcontain">
-								<label for="firstNames">Nur ersten Vornamen anzeigen</label>
+								<label for="firstNames">Erste Vornamen anzeigen (Adressdatenbank)</label>
 								<input id="firstNames" name="furtherNames" value="firstNames" type="radio" checked="checked" />
 							</div>
 						</div>
 
 						<div class="ui-block-b">
 							<div class="ui-widget" data-role="fieldcontain">
-								<label for="furtherNames">Nur zweite, dritte und weitere Vornamen</label>
+								<label for="furtherNames">Zweite, dritte und weitere Vornamen (kiz-Accounts)</label>
 								<input name="furtherNames" id="furtherNames" type="radio" value="furtherNames" />
 							</div>
 						</div>
@@ -213,7 +216,7 @@
 					recalcData();
 				} else {
 					$("#range-1a").val(110);
-					$("#range-1b").val(250);
+					$("#range-1b").val(325);
 
 					recalcData();
 				}

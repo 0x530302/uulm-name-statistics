@@ -4,6 +4,8 @@ default: all
 
 all:
 	ssh $(KIZ_USER)@login.rz.uni-ulm.de ypcat passwd > ./ypcat-users.lst
+	scp $(KIZ_USER)@login.rz.uni-ulm.de:/soft/common/lib/address/address.db .
+
 	cat ./ypcat-users.lst \
 		| awk -F ":" '{print $$5}' \
 		| sed -e "s/Prof\.\s//" \
@@ -15,6 +17,11 @@ all:
 		| grep -v "Cplus-" \
 		| grep -v "DNS" \
 		| sed -e "s/-$$//" \
+		> ./firstnames.lst
+
+	cat ./address.db \
+		| awk -F ":" '{print $$1}' \
+		| sed -e 's/\(.\)/\U\1/' \
 		> ./firstnames.lst
 
 	cat ./firstnames.lst \
@@ -29,11 +36,7 @@ all:
 		>> ./js/data.js
 
 	make further
-
-	rm ./ypcat-users.lst
-	rm ./firstnames.uniq
-	rm ./firstnames.lst
-
+	make clean
 
 further:
 	cat ./ypcat-users.lst \
@@ -67,6 +70,12 @@ further:
 		| awk -F " " '{print "[\"" $$2 "\", " $$1 "],"}' \
 		| sed -e "$$ s/,$$/]/" \
 		>> ./js/further-names-data.js
+
+clean:
+	rm ./ypcat-users.lst
+	rm ./address.db
+	rm ./firstnames.uniq
+	rm ./firstnames.lst
 
 	rm ./further-names.lst
 	rm ./further-names.uniq
